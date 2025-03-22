@@ -243,4 +243,5 @@ aMath::Mat4 aMath::perspective(float fov, float near, float far)
 	perspective_matrix.values[10] = -(far / (far - near) );
 	perspective_matrix.values[11] = -1;
 	perspective_matrix.values[14] = -( (far * near) / (far - near) );
+	return perspective_matrix;
 }
