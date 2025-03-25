@@ -354,7 +354,7 @@ namespace aMath
     // Math functions
 
     float deg_to_rad(float deg);
-    float clamp(float lower, float higher, float value);
+    float clamp(float value, float lower, float higher);
 
     // TODO
     /*
