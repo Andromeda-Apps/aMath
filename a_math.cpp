@@ -234,11 +234,11 @@ aMath::Mat4 aMath::orthographic(float left, float right, float top, float bottom
 	return orthographic_matrix;
 }
 
-aMath::Mat4 aMath::perspective(float fov, float near, float far)
+aMath::Mat4 aMath::perspective(float fov, float aspect, float near, float far)
 {
 	aMath::Mat4 perspective_matrix;
 	float s = 1.0f / (tan( (fov / 2.0f) * (PI / 180.0f) ));
-	perspective_matrix.values[0] = s;
+	perspective_matrix.values[0] = s / aspect;
 	perspective_matrix.values[5] = s;
 	perspective_matrix.values[10] = -(far / (far - near) );
 	perspective_matrix.values[11] = -1;

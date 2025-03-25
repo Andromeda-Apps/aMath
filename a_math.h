@@ -348,7 +348,7 @@ namespace aMath
 
     // Orthographic matrix
     Mat4 orthographic(float left, float right, float top, float bottom, float near, float far);
-    Mat4 perspective(float fov, float near, float far);
+    Mat4 perspective(float fov, float aspect, float near, float far);
 
 
     // Math functions
