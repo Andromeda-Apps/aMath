@@ -225,6 +225,33 @@ namespace aMath
             values[rot10] = sin(angle);
             values[rot11] = cos(angle);
         }
+        void transpose() {
+            float temp = values[1];
+            values[1] = values[4];
+            values[4] = temp;
+
+            temp = values[2];
+            values[2] = values[8];
+            values[8] = temp;
+
+            temp = values[3];
+            values[3] = values[12];
+            values[12] = temp;
+
+
+            temp = values[6];
+            values[6] = values[9];
+            values[9] = temp;
+
+
+            temp = values[7];
+            values[7] = values[13];
+            values[13] = temp;
+
+            temp = values[11];
+            values[11] = values[14];
+            values[14] = temp;
+        }
         void printValues()
         {
             for (int i = 0; i < sizeof(values) / sizeof(float); i++)
@@ -239,10 +266,17 @@ namespace aMath
 
     typedef Vec3 Color_RGB;
     typedef Vec4 Color_RGBA;
+    
+    static Vec3 UP = Vec3(0.0, 1.0, 0.0);
+    static Vec3 RIGHT = Vec3(1.0, 0.0, 0.0);
+    static Vec3 FORWARD = Vec3(0.0, 0.0, -1.0);
+    static Vec3 DOWN = Vec3(0.0, -1.0, 0.0);
+    static Vec3 LEFT = Vec3(-1.0, 0.0, 0.0);
+    static Vec3 BACKWARD = Vec3(0.0, 0.0, 1.0);
 
     /*
      *
-     * Math Functions
+     * Linear Math Operations
      *
      */
 
@@ -294,6 +328,10 @@ namespace aMath
     Vec4 multiply(const Mat4& a, const Vec4& b);
     Mat4 multiply(const Mat4& a, const Mat4& b);
 
+
+    // Affine transform operations
+
+
     // Transformation matrices
     // Translation
     Mat4 translate(float x, float y, float z);
@@ -311,6 +349,12 @@ namespace aMath
     // Orthographic matrix
     Mat4 orthographic(float left, float right, float top, float bottom, float near, float far);
     Mat4 perspective(float fov, float near, float far);
+
+
+    // Math functions
+
+    float deg_to_rad(float deg);
+    float clamp(float lower, float higher, float value);
 
     // TODO
     /*
