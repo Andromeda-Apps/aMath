@@ -258,4 +258,11 @@ float aMath::clamp(float value, float lower, float higher) {
 	return value;
 }
 
+float aMath::min(float v1, float v2) {
+	return (v1 < v2) ? v1 : v2;
+}
+float aMath::max(float v1, float v2) {
+	return (v1 > v2) ? v1 : v2;
+}
+
 #pragma endregion MathFunctions
