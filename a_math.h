@@ -37,15 +37,31 @@ namespace aMath
     inline Vec2 operator+(const Vec2& a, const Vec2& b) { return { a.x + b.x, a.y + b.y }; }
     inline Vec2 operator+(const Vec2& a, float b) { return { a.x + b, a.y + b }; }
     inline Vec2 operator+(float a, const Vec2& b) { return { a + b.x, a + b.x }; }
+
+    inline Vec2& operator+=(Vec2& a, const Vec2& b) { a.x += b.x; a.y += b.y; return a; }
+    inline Vec2& operator+=(Vec2& a, float b) { a.x += b; a.y += b; return a; }
+
     inline Vec2 operator-(const Vec2& a, const Vec2& b) { return { a.x - b.x, a.y - b.y }; }
     inline Vec2 operator-(const Vec2& a, float b) { return { a.x - b, a.y - b }; }
     inline Vec2 operator-(float a, const Vec2& b) { return { a - b.x, a - b.y }; }
+
+    inline Vec2& operator-=(Vec2& a, const Vec2& b) { a.x -= b.x; a.y -= b.y; return a; }
+    inline Vec2& operator-=(Vec2& a, float b) { a.x -= b; a.y -= b; return a; }
+
     inline Vec2 operator*(const Vec2& a, const Vec2& b) { return { a.x * b.x, a.y * b.y }; }
     inline Vec2 operator*(const Vec2& a, float b) { return { a.x * b, a.y * b }; }
     inline Vec2 operator*(float a, const Vec2& b) { return { a * b.x, a * b.y }; }
+
+    inline Vec2& operator*=(Vec2& a, const Vec2& b) { a.x *= b.x; a.y *= b.y; return a; }
+    inline Vec2& operator*=(Vec2& a, float b) { a.x *= b; a.y *= b; return a;}
+
     inline Vec2 operator/(const Vec2& a, const Vec2& b) { return { a.x / b.x, a.y / b.y }; }
     inline Vec2 operator/(const Vec2& a, float b) { return { a.x / b, a.y / b }; }
     inline Vec2 operator/(float a, const Vec2& b) { return { a / b.x, a / b.y }; }
+
+    inline Vec2& operator/=(Vec2& a, const Vec2& b) { a.x /= b.x; a.y /= b.y; return a; }
+    inline Vec2& operator/=(Vec2& a, float b) { a.x /= b; a.y /= b; return a; }
+
     inline bool operator!=(const Vec2& a, const Vec2& b) { return !(a.x == b.x && a.y == b.y); }
 
     struct Vec3
@@ -84,15 +100,31 @@ namespace aMath
     inline Vec3 operator+(const Vec3& a, const Vec3& b) { return { a.x + b.x, a.y + b.y, a.z + b.z }; }
     inline Vec3 operator+(const Vec3& a, float b) { return { a.x + b, a.y + b, a.z + b }; }
     inline Vec3 operator+(float a, const Vec3& b) { return { a + b.x, a + b.y, a + b.z }; }
+
+    inline Vec3& operator+=(Vec3& a, const Vec3& b) { a.x += b.x; a.y += b.y; a.z += b.z; return a; }
+    inline Vec3& operator+=(Vec3& a, float b) { a.x += b; a.y += b; a.z += b; return a; }
+
     inline Vec3 operator-(const Vec3& a, const Vec3& b) { return { a.x - b.x, a.y - b.y, a.z - b.z }; }
     inline Vec3 operator-(const Vec3& a, float b) { return { a.x - b, a.y - b, a.z - b }; }
     inline Vec3 operator-(float a, const Vec3& b) { return { a - b.x, a - b.y, a - b.z }; }
+
+    inline Vec3& operator-=(Vec3& a, const Vec3& b) { a.x -= b.x; a.y -= b.y; a.z -= b.z; return a; }
+    inline Vec3& operator-=(Vec3& a, float b) { a.x -= b; a.y -= b; a.z -= b; return a; }
+    
     inline Vec3 operator*(const Vec3& a, const Vec3& b) { return { a.x * b.x, a.y * b.y, a.z * b.z }; }
     inline Vec3 operator*(const Vec3& a, float b) { return { a.x * b, a.y * b, a.z * b }; }
     inline Vec3 operator*(float a, const Vec3& b) { return { a * b.x, a * b.y, a * b.z }; }
+    
+    inline Vec3& operator*=(Vec3& a, const Vec3& b) { a.x *= b.x; a.y *= b.y; a.z *= b.z; return a; }
+    inline Vec3& operator*=(Vec3& a, float b) { a.x *= b; a.y *= b; a.z *= b; return a;}
+
     inline Vec3 operator/(const Vec3& a, const Vec3& b) { return { a.x / b.x, a.y / b.y, a.z / b.y }; }
     inline Vec3 operator/(const Vec3& a, float b) { return { a.x / b, a.y / b, a.z / b }; }
     inline Vec3 operator/(float a, const Vec3& b) { return { a / b.x, a / b.y, a / b.z }; }
+    
+    inline Vec3& operator/=(Vec3& a, const Vec3& b) { a.x /= b.x; a.y /= b.y; a.z /= b.z; return a; }
+    inline Vec3& operator/=(Vec3& a, float b) { a.x /= b; a.y /= b; a.z /= b; return a; }
+
     inline bool operator!=(const Vec3& a, const Vec3& b) { return !(a.x == b.x && a.y == b.y && a.z == b.z); }
 
 
@@ -122,15 +154,31 @@ namespace aMath
     inline Vec4 operator+(const Vec4& a, const Vec4& b) { return { a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w }; }
     inline Vec4 operator+(const Vec4& a, float b) { return { a.x + b, a.y + b, a.z + b, a.w + b }; }
     inline Vec4 operator+(float a, const Vec4& b) { return { a + b.x, a + b.y, a + b.z, a + b.w }; }
+
+    inline Vec4& operator+=(Vec4& a, const Vec4& b) { a.x += b.x; a.y += b.y; a.z += b.z; a.w += b.w; return a; }
+    inline Vec4& operator+=(Vec4& a, float b) { a.x += b; a.y += b; a.z += b; a.w += b; return a; }
+
     inline Vec4 operator-(const Vec4& a, const Vec4& b) { return { a.x - b.x, a.y - b.y, a.z - b.z, a.w - b.w }; }
     inline Vec4 operator-(const Vec4& a, float b) { return { a.x - b, a.y - b, a.z - b, a.w - b }; }
     inline Vec4 operator-(float a, const Vec4& b) { return { a - b.x, a - b.y, a - b.z, a - b.w }; }
+    
+    inline Vec4& operator-=(Vec4& a, const Vec4& b) { a.x -= b.x; a.y -= b.y; a.z -= b.z; a.w -= b.w; return a; }
+    inline Vec4& operator-=(Vec4& a, float b) { a.x -= b; a.y -= b; a.z -= b; a.w -= b; return a; }
+
     inline Vec4 operator*(const Vec4& a, const Vec4& b) { return { a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w }; }
     inline Vec4 operator*(const Vec4& a, float b) { return { a.x * b, a.y * b, a.z * b, a.w * b }; }
     inline Vec4 operator*(float a, const Vec4& b) { return { a * b.x, a * b.y, a * b.z, a * b.w }; }
+
+    inline Vec4& operator*=(Vec4& a, const Vec4& b) { a.x *= b.x; a.y *= b.y; a.z *= b.z; a.w *= b.w; return a; }
+    inline Vec4& operator*=(Vec4& a, float b) { a.x *= b; a.y *= b; a.z *= b; a.w *= b; return a;}
+    
     inline Vec4 operator/(const Vec4& a, const Vec4& b) { return { a.x / b.x, a.y / b.y, a.z / b.z, a.w / b.w }; }
     inline Vec4 operator/(const Vec4& a, float b) { return { a.x / b, a.y / b, a.z / b, a.w / b }; }
     inline Vec4 operator/(float a, const Vec4& b) { return { a / b.x, a / b.y, a / b.z, a / b.w }; }
+    
+    inline Vec4& operator/=(Vec4& a, const Vec4& b) { a.x /= b.x; a.y /= b.y; a.z /= b.z; a.w /= b.w; return a; }
+    inline Vec4& operator/=(Vec4& a, float b) { a.x /= b; a.y /= b; a.z /= b; a.w /= b; return a; }
+
     inline bool operator!=(const Vec4& a, const Vec4& b) { return !(a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w); }
 
 
@@ -324,7 +372,6 @@ namespace aMath
     Mat3 subtract(const Mat3& a, const Mat3& b);
     Mat4 add(const Mat4& a, const Mat4& b);
     Mat4 subtract(const Mat4& a, const Mat4& b);
-
 
     // Affine transform operations
 
