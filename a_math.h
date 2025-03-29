@@ -325,9 +325,6 @@ namespace aMath
     Mat4 add(const Mat4& a, const Mat4& b);
     Mat4 subtract(const Mat4& a, const Mat4& b);
 
-    Vec4 multiply(const Mat4& a, const Vec4& b);
-    Mat4 multiply(const Mat4& a, const Mat4& b);
-
 
     // Affine transform operations
 

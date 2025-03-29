@@ -2,31 +2,18 @@
 
 void aMath::identity(aMath::Mat3& matrix)
 {
-	for (int i = 0; i < sizeof(matrix.values) / sizeof(float); i++)
-	{
-		if (i == 0 || i == 4 || i == 8)
-		{
-			matrix.values[i] = 1.0f;
-		}
-		else
-		{
-			matrix.values[i] = 0.0f;
-		}
-	}
+	std::memset(matrix.values, 0, sizeof(matrix.values));
+	matrix.values[0] = 1.0;
+	matrix.values[4] = 1.0;
+	matrix.values[8] = 1.0;
 }
 void aMath::identity(aMath::Mat4& matrix)
 {
-	for (int i = 0; i < sizeof(matrix.values) / sizeof(float); i++)
-	{
-		if (i == 0 || i == 5 || i == 10 || i == 15)
-		{
-			matrix.values[i] = 1;
-		}
-		else
-		{
-			matrix.values[i] = 0;
-		}
-	}
+	std::memset(matrix.values, 0, sizeof(matrix.values));
+	matrix.values[0] = 1.0;
+	matrix.values[5] = 1.0;
+	matrix.values[10] = 1.0;
+	matrix.values[15] = 1.0;
 }
 
 aMath::Vec2 aMath::add(const aMath::Vec2& a, const aMath::Vec2& b) { return aMath::Vec2(a.x + b.x, a.y + b.y); }
@@ -50,37 +37,28 @@ float aMath::dot(const aMath::Vec4& a, const aMath::Vec4& b) { return ((a.x * b.
 
 aMath::Vec3 aMath::mul(const aMath::Mat3& m, const aMath::Vec3& v)
 {
-	float val1 = (m.values[0] * v.x) + (m.values[1] * v.y) + (m.values[2] * v.z);
-	float val2 = (m.values[3] * v.x) + (m.values[4] * v.y) + (m.values[5] * v.z);
-	float val3 = (m.values[6] * v.x) + (m.values[7] * v.y) + (m.values[8] * v.z);
-	aMath::Vec3 retVector(val1, val2, val3);
-	return retVector;
+	return {
+		(m.values[0] * v.x) + (m.values[3] * v.y) + (m.values[6] * v.z),
+		(m.values[1] * v.x) + (m.values[4] * v.y) + (m.values[7] * v.z),
+		(m.values[2] * v.x) + (m.values[5] * v.y) + (m.values[8] * v.z)
+	};
 }
 aMath::Vec3 aMath::mul(const aMath::Vec3& v, const aMath::Mat3& m)
 {
-	float val1 = (v.x * m.values[0]) + (v.y * m.values[3]) + (v.z * m.values[6]);
-	float val2 = (v.x * m.values[1]) + (v.y * m.values[4]) + (v.z * m.values[7]);
-	float val3 = (v.x * m.values[2]) + (v.y * m.values[5]) + (v.z * m.values[8]);
-	aMath::Vec3 retVector(val1, val2, val3);
-	return retVector;
+	return mul(m, v); //aMath::mul(vec3 v, mat3 m)
 }
 aMath::Vec4 aMath::mul(const aMath::Mat4& m, const aMath::Vec4& v)
 {
-	float val1 = (m.values[0] * v.x) + (m.values[1] * v.y) + (m.values[2] * v.z) + (m.values[3] * v.w);
-	float val2 = (m.values[4] * v.x) + (m.values[5] * v.y) + (m.values[6] * v.z) + (m.values[7] * v.w);
-	float val3 = (m.values[8] * v.x) + (m.values[9] * v.y) + (m.values[10] * v.z) + (m.values[11] * v.w);
-	float val4 = (m.values[12] * v.x) + (m.values[13] * v.y) + (m.values[14] * v.z) + (m.values[15] * v.w);
-	aMath::Vec4 retVector(val1, val2, val3, val4);
-	return retVector;
+	return {
+		(m.values[0] * v.x) + (m.values[1] * v.y) + (m.values[2] * v.z) + (m.values[3] * v.w),
+		(m.values[4] * v.x) + (m.values[5] * v.y) + (m.values[6] * v.z) + (m.values[7] * v.w),
+		(m.values[8] * v.x) + (m.values[9] * v.y) + (m.values[10] * v.z) + (m.values[11] * v.w),
+		(m.values[12] * v.x) + (m.values[13] * v.y) + (m.values[14] * v.z) + (m.values[15] * v.w)
+	};
 }
 aMath::Vec4 aMath::mul(const aMath::Vec4& v, const aMath::Mat4& m)
 {
-	float val1 = (v.x * m.values[0]) + (v.y * m.values[4]) + (v.z * m.values[8]) + (v.w * m.values[12]);
-	float val2 = (v.x * m.values[1]) + (v.y * m.values[5]) + (v.z * m.values[9]) + (v.w * m.values[13]);
-	float val3 = (v.x * m.values[2]) + (v.y * m.values[6]) + (v.z * m.values[10]) + (v.w * m.values[14]);
-	float val4 = (v.x * m.values[3]) + (v.y * m.values[7]) + (v.z * m.values[11]) + (v.w * m.values[15]);
-	aMath::Vec4 retVector(val1, val2, val3, val4);
-	return retVector;
+	return mul(m, v); // aMath::mul(vec4 v, mat4 m)
 }
 
 aMath::Mat3 aMath::mul(float a, const aMath::Mat3& m)
@@ -107,12 +85,13 @@ aMath::Mat3 aMath::mul(const aMath::Mat3& a, const aMath::Mat3& b)
 	aMath::Mat3 retMatrix;
 	for (int i = 0; i < 3; i++)
 	{
-		aMath::Vec3 vecA(a.values[(i * 3) + 0], a.values[(i * 3) + 1], a.values[(i * 3) + 2]);
-		for (int j = 0; j < 3; j++)
-		{
-			aMath::Vec3 vecB(b.values[j], b.values[j + 3], b.values[j + 6]);
-			retMatrix.values[(i * 3) + j] = aMath::dot(vecA, vecB);
-		}
+		float a0 = a.values[i*3+0];
+		float a1 = a.values[i*3+1];
+		float a2 = a.values[i*3+2];
+
+		retMatrix.values[i*3+0] = a0*b.values[0] + a1*b.values[3] + a2*b.values[6];
+		retMatrix.values[i*3+1] = a0*b.values[1] + a1*b.values[4] + a2*b.values[7];
+		retMatrix.values[i*3+2] = a0*b.values[2] + a1*b.values[5] + a2*b.values[8];
 	}
 	return retMatrix;
 }
@@ -121,12 +100,15 @@ aMath::Mat4 aMath::mul(const aMath::Mat4& a, const aMath::Mat4& b)
 	aMath::Mat4 retMatrix;
 	for (int i = 0; i < 4; i++)
 	{
-		aMath::Vec4 vecA(a.values[(i * 4) + 0], a.values[(i * 4) + 1], a.values[(i * 4) + 2], a.values[(i * 4) + 3]);
-		for (int j = 0; j < 4; j++)
-		{
-			aMath::Vec4 vecB(b.values[j], b.values[j + 4], b.values[j + 8], b.values[j + 12]);
-			retMatrix.values[(i * 4) + j] = aMath::dot(vecA, vecB);
-		}
+		float a0 = a.values[i*4+0];
+		float a1 = a.values[i*4+1];
+		float a2 = a.values[i*4+2];
+		float a3 = a.values[i*4+3];
+
+		retMatrix.values[i*4+0] = a0*b.values[0] + a1*b.values[4] + a2*b.values[8] + a3*b.values[12];
+		retMatrix.values[i*4+1] = a0*b.values[1] + a1*b.values[5] + a2*b.values[9] + a3*b.values[13];
+		retMatrix.values[i*4+2] = a0*b.values[2] + a1*b.values[6] + a2*b.values[10] + a3*b.values[14];
+		retMatrix.values[i*4+3] = a0*b.values[3] + a1*b.values[7] + a2*b.values[11] + a3*b.values[15];
 	}
 	return retMatrix;
 }
@@ -168,32 +150,12 @@ aMath::Mat4 aMath::subtract(const aMath::Mat4& a, const aMath::Mat4& b)
 	return retMatrix;
 }
 
-aMath::Vec4 aMath::multiply(const aMath::Mat4& a, const aMath::Vec4& b)
-{
-	aMath::Vec4 retVector;
-	retVector.x = (a.values[0] * b.x) + (a.values[1] * b.y) + (a.values[2] * b.z) + (a.values[3] * b.w);
-	retVector.y = (a.values[4] * b.x) + (a.values[5] * b.y) + (a.values[6] * b.z) + (a.values[7] * b.w);
-	retVector.z = (a.values[8] * b.x) + (a.values[9] * b.y) + (a.values[10] * b.z) + (a.values[11] * b.w);
-	retVector.w = (a.values[12] * b.x) + (a.values[13] * b.y) + (a.values[14] * b.z) + (a.values[15] * b.w);
-	return retVector;
-}
-aMath::Mat4 aMath::multiply(const aMath::Mat4& a, const aMath::Mat4& b)
-{
-	aMath::Mat4 retMat;
-	for (int i = 0; i < sizeof(retMat.values) / sizeof(float); i++)
-	{
-		retMat.values[i] = (a.values[((i / 4) * 4) + 0] * b.values[(i % 4) + 0]) + (a.values[((i / 4) * 4) + 1] * b.values[(i % 4) + 4]) + (a.values[((i / 4) * 4) + 2] * b.values[(i % 4) + 8]) + (a.values[((i / 4) * 4) + 3] * b.values[(i % 4) + 12]);
-	}
-	return retMat;
-}
-
 aMath::Mat4 aMath::translate(float x, float y, float z)
 {
 	aMath::Mat4 transformation;
 	aMath::Vec3 translateVector(x, y, z);
 	transformation.translate(translateVector);
 	return transformation;
-	// return multiply(transformation, position);
 }
 aMath::Mat4 aMath::translate(aMath::Vec3& pos) {return aMath::translate(pos.x, pos.y, pos.z);}
 
