@@ -65,7 +65,8 @@ namespace aMath
     inline Vec2& operator/=(Vec2& a, const Vec2& b) { a.x /= b.x; a.y /= b.y; return a; }
     inline Vec2& operator/=(Vec2& a, float b) { a.x /= b; a.y /= b; return a; }
 
-    inline bool operator!=(const Vec2& a, const Vec2& b) { return !(a.x == b.x && a.y == b.y); }
+    inline bool operator==(const Vec2& a, const Vec2& b) { return (a.x == b.x && a.y == b.y); }
+    inline bool operator!=(const Vec2& a, const Vec2& b) { return !(a == b); }
 
     struct Vec3
     {
@@ -130,7 +131,8 @@ namespace aMath
     inline Vec3& operator/=(Vec3& a, const Vec3& b) { a.x /= b.x; a.y /= b.y; a.z /= b.z; return a; }
     inline Vec3& operator/=(Vec3& a, float b) { a.x /= b; a.y /= b; a.z /= b; return a; }
 
-    inline bool operator!=(const Vec3& a, const Vec3& b) { return !(a.x == b.x && a.y == b.y && a.z == b.z); }
+    inline bool operator==(const Vec3& a, const Vec3& b) { return (a.x == b.x && a.y == b.y && a.z == b.z); }
+    inline bool operator!=(const Vec3& a, const Vec3& b) { return !(a == b); }
 
 
     struct Vec4
@@ -186,7 +188,8 @@ namespace aMath
     inline Vec4& operator/=(Vec4& a, const Vec4& b) { a.x /= b.x; a.y /= b.y; a.z /= b.z; a.w /= b.w; return a; }
     inline Vec4& operator/=(Vec4& a, float b) { a.x /= b; a.y /= b; a.z /= b; a.w /= b; return a; }
 
-    inline bool operator!=(const Vec4& a, const Vec4& b) { return !(a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w); }
+    inline bool operator==(const Vec4& a, const Vec4& b) { return (a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w); }
+    inline bool operator!=(const Vec4& a, const Vec4& b) { return !(a == b); }
 
 
     struct Mat3
