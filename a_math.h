@@ -12,8 +12,11 @@ namespace aMath
 
     struct Vec2
     {
-        float x;
-        float y;
+        union {
+            struct { float x, y; };
+            struct { float u, v; };
+        };
+
         Vec2(float x, float y) : x(x), y(y) {}
         Vec2()
         {
@@ -66,9 +69,11 @@ namespace aMath
 
     struct Vec3
     {
-        float x;
-        float y;
-        float z;
+        union {
+            struct { float x, y, z; };
+            struct { float r, g, b; };
+        };
+
         Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
         Vec3()
         {
@@ -130,10 +135,12 @@ namespace aMath
 
     struct Vec4
     {
-        float x;
-        float y;
-        float z;
-        float w;
+
+        union {
+            struct { float x, y, z, w; };
+            struct { float r, g, b, a; };
+        };
+
         Vec4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
         Vec4()
         {
