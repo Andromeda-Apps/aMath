@@ -227,6 +227,49 @@ namespace aMath
         }
     };
 
+    inline Mat3& operator+=(Mat3& a, const Mat3& b) {
+        for (int i = 0; i < 9; i++) a.values[i] += b.values[i];
+        return a;
+    }
+    inline Mat3& operator+=(Mat3& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] += b;
+        return a;
+    }
+
+    inline Mat3 operator+(const Mat3& a, const Mat3& b) {
+        Mat3 c = a;
+        c += b;
+        return c;
+    }
+    inline Mat3 operator+(const Mat3& a, float b) {
+        Mat3 c = a;
+        c += b;
+        return c;
+    }
+    inline Mat3 operator+(float a, const Mat3& b) {
+        return b + a;
+    }
+
+    inline Mat3& operator-=(Mat3& a, const Mat3& b) {
+        for (int i = 0; i < 9; i++) a.values[i] -= b.values[i];
+        return a;
+    }
+    inline Mat3& operator-=(Mat3& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] -= b;
+        return a;
+    }
+
+    inline Mat3 operator-(const Mat3& a, const Mat3& b) {
+        Mat3 c = a;
+        c -= b;
+        return c;
+    }
+    inline Mat3 operator-(const Mat3& a, float b) {
+        Mat3 c = a;
+        c -= b;
+        return c;
+    }
+
     struct Mat4
     {
         static const int translateX = 3;
