@@ -23,7 +23,8 @@ namespace aMath
             x = 0.0f;
             y = 0.0f;
         }
-        float length() { return sqrt(x*x + y*y); }
+        float length_squared() { return x*x + y*y; }
+        float length() { return sqrt(length_squared()); }
         void negate()
         {
             x = -x;
@@ -88,10 +89,7 @@ namespace aMath
             y = 0.0f;
             z = 0.0f;
         }
-        float length_squared() {
-            float a = x*x + y*y + z*z;
-            return (a > 0) ? a : -a; 
-        }
+        float length_squared() { return x*x + y*y + z*z; }
         float length() { return sqrt(length_squared()); }
         void negate()
         {
@@ -162,7 +160,8 @@ namespace aMath
             z = 0.0f;
             w = 0.0f;
         }
-        float length() { return sqrt(x*x + y*y + z*z + w*w); }
+        float length_squared() { return x*x + y*y + z*z + w*w; }
+        float length() { return sqrt(length_squared()); }
         void negate()
         {
             x = -x;
@@ -170,6 +169,16 @@ namespace aMath
             z = -z;
             w = -w;
         }
+        void scale(float magnitude) {
+            float old_mag = length();
+            if (old_mag == 0.0) return;
+            float factor = magnitude / old_mag;
+            x *= factor;
+            y *= factor;
+            z *= factor;
+            w *= factor;
+        }
+        void normalize() {scale(1.0);}
 
         void printValues()
         {
