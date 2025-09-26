@@ -270,6 +270,54 @@ namespace aMath
         return c;
     }
 
+    inline Mat3& operator*=(Mat3& a, const Mat3& b) {
+        for (int i = 0; i < 3; i++) {
+            float a0 = a.values[i*3+0];
+            float a1 = a.values[i*3+1];
+            float a2 = a.values[i*3+2];
+            a.values[i*3+0] = a0*b.values[0] + a1*b.values[3] + a2*b.values[6];
+            a.values[i*3+1] = a0*b.values[1] + a1*b.values[4] + a2*b.values[7];
+            a.values[i*3+2] = a0*b.values[2] + a1*b.values[5] + a2*b.values[8];
+        }
+        return a;
+    }
+    inline Mat3& operator*=(Mat3& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] *= b;
+        return a;
+    }
+
+    inline Mat3 operator*(const Mat3& a, const Mat3& b) {
+        Mat3 c = a;
+        c *= b;
+        return c;
+    }
+    inline Mat3 operator*(const Mat3& a, float b) {
+        Mat3 c = a;
+        c *= b;
+        return c;
+    }
+    inline Mat3 operator*(float a, const Mat3& b) {
+        Mat3 c = b;
+        c *= a;
+        return c;
+    }
+
+    inline Mat3& operator/=(Mat3& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] /= b;
+        return a;
+    }
+
+    inline Mat3 operator/(const Mat3& a, float b) {
+        Mat3 c = a;
+        c /= b;
+        return c;
+    }
+    inline Mat3 operator/(float a, const Mat3& b) {
+        Mat3 c = b;
+        c /= a;
+        return c;
+    }
+
     struct Mat4
     {
         static const int translateX = 3;
@@ -361,6 +409,99 @@ namespace aMath
             }
         }
     };
+
+    inline Mat4& operator+=(Mat4& a, const Mat4& b) {
+        for (int i = 0; i < 16; i++) a.values[i] += b.values[i];
+        return a;
+    }
+    inline Mat4& operator+=(Mat4& a, float b) {
+        for (int i = 0; i < 16; i++) a.values[i] += b;
+        return a;
+    }
+
+    inline Mat4 operator+(const Mat4& a, const Mat4& b) {
+        Mat4 c = a;
+        c += b;
+        return c;
+    }
+    inline Mat4 operator+(const Mat4& a, float b) {
+        Mat4 c = a;
+        c += b;
+        return c;
+    }
+    inline Mat4 operator+(float a, const Mat4& b) {
+        return b + a;
+    }
+
+    inline Mat4& operator-=(Mat4& a, const Mat4& b) {
+        for (int i = 0; i < 9; i++) a.values[i] -= b.values[i];
+        return a;
+    }
+    inline Mat4& operator-=(Mat4& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] -= b;
+        return a;
+    }
+
+    inline Mat4 operator-(const Mat4& a, const Mat4& b) {
+        Mat4 c = a;
+        c -= b;
+        return c;
+    }
+    inline Mat4 operator-(const Mat4& a, float b) {
+        Mat4 c = a;
+        c -= b;
+        return c;
+    }
+
+    inline Mat4 operator*=(Mat4& a, const Mat4& b) {
+        for (int i = 0; i < 4; i++) {
+            float a0 = a.values[i*4+0];
+            float a1 = a.values[i*4+1];
+            float a2 = a.values[i*4+2];
+            float a3 = a.values[i*4+3];
+            a.values[i*4+0] = a0*b.values[0] + a1*b.values[4] + a2*b.values[8] + a3*b.values[12];
+            a.values[i*4+1] = a0*b.values[1] + a1*b.values[5] + a2*b.values[9] + a3*b.values[13];
+            a.values[i*4+2] = a0*b.values[2] + a1*b.values[6] + a2*b.values[10] + a3*b.values[14];
+            a.values[i*4+3] = a0*b.values[3] + a1*b.values[7] + a2*b.values[11] + a3*b.values[15];
+        }
+        return a;
+    }
+    inline Mat4 operator*=(Mat4& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] *= b;
+        return a;
+    }
+
+    inline Mat4 operator*(const Mat4& a, const Mat4& b) {
+        Mat4 c = a;
+        c *= b;
+        return c;
+    }
+    inline Mat4 operator*(const Mat4& a, float b) {
+        Mat4 c = a;
+        c *= b;
+        return c;
+    }
+    inline Mat4 operator*(float a, const Mat4& b) {
+        Mat4 c = b;
+        c *= a;
+        return c;
+    }
+
+    inline Mat4 operator/=(Mat4& a, float b) {
+        for (int i = 0; i < 9; i++) a.values[i] /= b;
+        return a;
+    }
+
+    inline Mat4 operator/(const Mat4& a, float b) {
+        Mat4 c = a;
+        c /= b;
+        return c;
+    }
+    inline Mat4 operator/(float a, const Mat4& b) {
+        Mat4 c = b;
+        c /= a;
+        return c;
+    } 
 
     typedef Vec2 Point2;
     typedef Vec3 Point3;
