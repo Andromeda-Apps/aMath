@@ -36,6 +36,12 @@ namespace aMath
             x *= factor;
             y *= factor;
         }
+
+        void printValues()
+        {
+            std::cout << "[Vec2]" << std::endl;
+            std::cout << "{" << x << " " << y << "}" << std::endl;
+        }
     };
     inline Vec2 operator+(const Vec2& a, const Vec2& b) { return { a.x + b.x, a.y + b.y }; }
     inline Vec2 operator+(const Vec2& a, float b) { return { a.x + b, a.y + b }; }
@@ -102,6 +108,11 @@ namespace aMath
             z *= factor;
         }
         void normalize() {scale(1.0);}
+        void printValues()
+        {
+            std::cout << "[Vec3]" << std::endl;
+            std::cout << "{" << x << " " << y << " " << z << "}" << std::endl;
+        }
     };
     inline Vec3 operator+(const Vec3& a, const Vec3& b) { return { a.x + b.x, a.y + b.y, a.z + b.z }; }
     inline Vec3 operator+(const Vec3& a, float b) { return { a.x + b, a.y + b, a.z + b }; }
@@ -158,6 +169,12 @@ namespace aMath
             y = -y;
             z = -z;
             w = -w;
+        }
+
+        void printValues()
+        {
+            std::cout << "[Vec4]" << std::endl;
+            std::cout << "{" << x << " " << y << " " << z << " " << w << "}" << std::endl;
         }
     };
     inline Vec4 operator+(const Vec4& a, const Vec4& b) { return { a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w }; }
@@ -224,6 +241,16 @@ namespace aMath
             values[rotX2] = -sin(angle);
             values[rotY1] = sin(angle);
             values[rotY2] = cos(angle);
+        }
+        void printValues()
+        {
+            std::cout << "[Mat3]" << std::endl;
+            for (int i = 0; i < 9; i++)
+            {
+                std::cout << values[i] << " ";
+                if (i == 2 || i == 5 || i == 8)
+                    std::cout << std::endl;
+            }
         }
     };
 
@@ -403,9 +430,12 @@ namespace aMath
         }
         void printValues()
         {
-            for (int i = 0; i < sizeof(values) / sizeof(float); i++)
+            std::cout << "[Mat4]" << std::endl;
+            for (int i = 0; i < 16; i++)
             {
-                std::cout << values[i] << std::endl;
+                std::cout << values[i] << " ";
+                if (i == 3 || i == 7 || i == 11 || i == 15)
+                    std::cout << std::endl;
             }
         }
     };
