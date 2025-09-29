@@ -228,6 +228,16 @@ namespace aMath
             values[1] = values[2];
             values[2] = temp;
         }
+        void printValues()
+        {
+            std::cout << "[Mat2]" << std::endl;
+            for (int i = 0; i < 4; i++)
+            {
+                std::cout << values[i] << " ";
+                if (i == 1 || i == 3)
+                    std::cout << std::endl;
+            }
+        }
     };
 
     inline Mat2& operator+=(Mat2& a, const Mat2& b) {
