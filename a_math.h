@@ -668,26 +668,26 @@ namespace aMath
     void identity(Mat3& matrix);
     void identity(Mat4& matrix);
 
-    // Vec2 operations
-    Vec2 add(const Vec2& a, const Vec2& b);
-    Vec2 subtract(const Vec2& a, const Vec2& b);
-    Vec2 mul(const Vec2& a, const Vec2& b);
-    Vec2 mul(float a, const Vec2& b);
+    // Vec2 operations (Legacy – deprecated)
+    Vec2 add(const Vec2& a, const Vec2& b) { return a + b; }
+    Vec2 subtract(const Vec2& a, const Vec2& b) { return a - b; }
+    Vec2 mul(const Vec2& a, const Vec2& b) { return a * b; }
+    Vec2 mul(float a, const Vec2& b) { return a * b; }
     float dot(const Vec2& a, const Vec2& b);
 
-    // Vec3 operations
-    Vec3 add(const Vec3& a, const Vec3& b);
-    Vec3 subtract(const Vec3& a, const Vec3& b);
-    Vec3 mul(const Vec3& a, const Vec3& b);
-    Vec3 mul(float a, const Vec3& b);
+    // Vec3 operations (Legacy – deprecated)
+    Vec3 add(const Vec3& a, const Vec3& b) { return a + b; }
+    Vec3 subtract(const Vec3& a, const Vec3& b) { return a - b; }
+    Vec3 mul(const Vec3& a, const Vec3& b) { return a * b; }
+    Vec3 mul(float a, const Vec3& b) { return a * b; }
     Vec3 cross(const Vec3& a, const Vec3& b);
     float dot(const Vec3& a, const Vec3& b);
 
-    // Vec4 operations
-    Vec4 add(const Vec4& a, const Vec4& b);
-    Vec4 subtract(const Vec4& a, const Vec4& b);
-    Vec4 mul(const Vec4& a, const Vec4& b);
-    Vec4 mul(float a, const Vec4& b);
+    // Vec4 operations (Legacy – deprecated)
+    Vec4 add(const Vec4& a, const Vec4& b) { return a + b; }
+    Vec4 subtract(const Vec4& a, const Vec4& b) { return a - b; }
+    Vec4 mul(const Vec4& a, const Vec4& b) { return a * b; }
+    Vec4 mul(float a, const Vec4& b) { return a * b; }
     float dot(const Vec4& a, const Vec4& b);
 
     // Matrix * Vector and Vector * Matrix
@@ -696,19 +696,19 @@ namespace aMath
     Vec4 mul(const Mat4& m, const Vec4& v);
     Vec4 mul(const Vec4& v, const Mat4& m);
 
-    // Skalar * Matrix
-    Mat3 mul(float a, const Mat3& m);
-    Mat4 mul(float a, const Mat4& m);
+    // Skalar * Matrix (Legacy – deprecated)
+    Mat3 mul(float a, const Mat3& m) { return a * m; }
+    Mat4 mul(float a, const Mat4& m) { return a * m; }
 
-    // Matrix * Matrix
-    Mat3 mul(const Mat3& a, const Mat3& b);
-    Mat4 mul(const Mat4& a, const Mat4& b);
+    // Matrix * Matrix (Legacy – deprecated)
+    Mat3 mul(const Mat3& a, const Mat3& b) { return a * b; }
+    Mat4 mul(const Mat4& a, const Mat4& b) { return a * b; }
 
-    // Matrix addition and subtraction
-    Mat3 add(const Mat3& a, const Mat3& b);
-    Mat3 subtract(const Mat3& a, const Mat3& b);
-    Mat4 add(const Mat4& a, const Mat4& b);
-    Mat4 subtract(const Mat4& a, const Mat4& b);
+    // Matrix addition and subtraction (Legacy – deprecated)
+    Mat3 add(const Mat3& a, const Mat3& b) { return a + b; }
+    Mat3 subtract(const Mat3& a, const Mat3& b) { return a - b; }
+    Mat4 add(const Mat4& a, const Mat4& b) { return a + b; }
+    Mat4 subtract(const Mat4& a, const Mat4& b) { return a - b; }
 
     // Affine transform operations
 
