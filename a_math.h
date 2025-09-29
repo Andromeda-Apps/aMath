@@ -331,6 +331,17 @@ namespace aMath
         return c;
     }
 
+    // Vec2 x Mat2
+    inline Vec2 operator*(const Mat2& m, const Vec2& v) {
+        return {
+            (m.values[0] * v.x) + (m.values[2] * v.y),
+            (m.values[1] * v.x) + (m.values[3] * v.y)
+        };
+    }
+    inline Vec2 operator*(const Vec2& v, const Mat2& m) {
+        return m * v;
+    }
+
 
     struct Mat3
     {
@@ -467,6 +478,20 @@ namespace aMath
         c /= a;
         return c;
     }
+
+
+    // Vec3 x Mat3
+    inline Vec3 operator*(const Mat3& m, const Vec3& v) {
+        return {
+            (m.values[0] * v.x) + (m.values[3] * v.y) + (m.values[6] * v.z),
+            (m.values[1] * v.x) + (m.values[4] * v.y) + (m.values[7] * v.z),
+            (m.values[2] * v.x) + (m.values[5] * v.y) + (m.values[8] * v.z)
+        };
+    }
+    inline Vec3 operator*(const Vec3& v, const Mat3& m) {
+        return m * v;
+    }
+
 
     struct Mat4
     {
@@ -656,6 +681,21 @@ namespace aMath
         return c;
     } 
 
+
+    // Vec4 x Mat4
+    inline Vec4 operator*(const Mat4& m, const Vec4& v) {
+        return {
+            (m.values[0] * v.x) + (m.values[1] * v.y) + (m.values[2] * v.z) + (m.values[3] * v.w),
+            (m.values[4] * v.x) + (m.values[5] * v.y) + (m.values[6] * v.z) + (m.values[7] * v.w),
+            (m.values[8] * v.x) + (m.values[9] * v.y) + (m.values[10] * v.z) + (m.values[11] * v.w),
+            (m.values[12] * v.x) + (m.values[13] * v.y) + (m.values[14] * v.z) + (m.values[15] * v.w)
+        };
+    }
+    inline Vec4 operator*(const Vec4& v, const Mat4& m) {
+        return m * v;
+    }
+
+
     typedef Vec2 Point2;
     typedef Vec3 Point3;
 
@@ -700,11 +740,11 @@ namespace aMath
     Vec4 mul(float a, const Vec4& b) { return a * b; }
     float dot(const Vec4& a, const Vec4& b);
 
-    // Matrix * Vector and Vector * Matrix
-    Vec3 mul(const Mat3& m, const Vec3& v);
-    Vec3 mul(const Vec3& v, const Mat3& m);
-    Vec4 mul(const Mat4& m, const Vec4& v);
-    Vec4 mul(const Vec4& v, const Mat4& m);
+    // Matrix * Vector and Vector * Matrix (Legacy – deprecated)
+    Vec3 mul(const Mat3& m, const Vec3& v) { return m * v; }
+    Vec3 mul(const Vec3& v, const Mat3& m) { return v * m; }
+    Vec4 mul(const Mat4& m, const Vec4& v) { return m * v; }
+    Vec4 mul(const Vec4& v, const Mat4& m) { return v * m; }
 
     // Skalar * Matrix (Legacy – deprecated)
     Mat3 mul(float a, const Mat3& m) { return a * m; }

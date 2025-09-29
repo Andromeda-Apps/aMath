@@ -23,32 +23,6 @@ float aMath::dot(const aMath::Vec3& a, const aMath::Vec3& b) { return ((a.x * b.
 
 float aMath::dot(const aMath::Vec4& a, const aMath::Vec4& b) { return ((a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w)); }
 
-aMath::Vec3 aMath::mul(const aMath::Mat3& m, const aMath::Vec3& v)
-{
-	return {
-		(m.values[0] * v.x) + (m.values[3] * v.y) + (m.values[6] * v.z),
-		(m.values[1] * v.x) + (m.values[4] * v.y) + (m.values[7] * v.z),
-		(m.values[2] * v.x) + (m.values[5] * v.y) + (m.values[8] * v.z)
-	};
-}
-aMath::Vec3 aMath::mul(const aMath::Vec3& v, const aMath::Mat3& m)
-{
-	return mul(m, v); //aMath::mul(vec3 v, mat3 m)
-}
-aMath::Vec4 aMath::mul(const aMath::Mat4& m, const aMath::Vec4& v)
-{
-	return {
-		(m.values[0] * v.x) + (m.values[1] * v.y) + (m.values[2] * v.z) + (m.values[3] * v.w),
-		(m.values[4] * v.x) + (m.values[5] * v.y) + (m.values[6] * v.z) + (m.values[7] * v.w),
-		(m.values[8] * v.x) + (m.values[9] * v.y) + (m.values[10] * v.z) + (m.values[11] * v.w),
-		(m.values[12] * v.x) + (m.values[13] * v.y) + (m.values[14] * v.z) + (m.values[15] * v.w)
-	};
-}
-aMath::Vec4 aMath::mul(const aMath::Vec4& v, const aMath::Mat4& m)
-{
-	return mul(m, v); // aMath::mul(vec4 v, mat4 m)
-}
-
 
 aMath::Mat4 aMath::translate(float x, float y, float z)
 {
