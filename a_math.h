@@ -218,6 +218,110 @@ namespace aMath
     inline bool operator!=(const Vec4& a, const Vec4& b) { return !(a == b); }
 
 
+    struct Mat2
+    {
+        float values[2 * 2] = {1.0, 0.0, 0.0, 1.0};
+        Mat2() {};
+
+        void transpose() {
+            float temp = values[1];
+            values[1] = values[2];
+            values[2] = temp;
+        }
+    };
+
+    inline Mat2& operator+=(Mat2& a, const Mat2& b) {
+        for (int i = 0; i < 4; i++) a.values[i] += b.values[i];
+        return a;
+    }
+    inline Mat2& operator+=(Mat2& a, float b) {
+        for (int i = 0; i < 4; i++) a.values[i] += b;
+        return a;
+    }
+
+    inline Mat2 operator+(const Mat2& a, const Mat2& b) {
+        Mat2 c = a;
+        c += b;
+        return c;
+    }
+    inline Mat2 operator+(const Mat2& a, float b) {
+        Mat2 c = a;
+        c += b;
+        return c;
+    }
+    inline Mat2 operator+(float a, const Mat2& b) {
+        Mat2 c = b;
+        c += a;
+        return c;
+    }
+
+    inline Mat2& operator-=(Mat2& a, const Mat2& b) {
+        for (int i = 0; i < 4; i++) a.values[i] -= b.values[i];
+        return a;
+    }
+    inline Mat2& operator-=(Mat2& a, float b) {
+        for (int i = 0; i < 4; i++) a.values[i] -= b;
+        return a;
+    }
+
+    inline Mat2 operator-(const Mat2& a, const Mat2& b) {
+        Mat2 c = a;
+        c -= b;
+        return c;
+    }
+    inline Mat2 operator-(const Mat2& a, float b) {
+        Mat2 c = a;
+        c -= b;
+        return c;
+    }
+
+    inline Mat2& operator*=(Mat2& a, const Mat2& b) {
+        for (int i = 0; i < 2; i++) {
+            float a0 = a.values[i*2+0];
+            float a1 = a.values[i*2+1];
+            a.values[i*2+0] = a0*b.values[0] + a1*b.values[2];
+            a.values[i*2+1] = a0*b.values[1] + a1*b.values[3];
+        }
+        return a;
+    }
+    inline Mat2& operator*=(Mat2& a, float b) {
+        for (int i = 0; i < 4; i++) a.values[i] *= b;
+        return a;
+    }
+
+    inline Mat2 operator*(const Mat2& a, const Mat2& b) {
+        Mat2 c = a;
+        c *= b;
+        return c;
+    }
+    inline Mat2 operator*(const Mat2& a, float b) {
+        Mat2 c = a;
+        c *= b;
+        return c;
+    }
+    inline Mat2 operator*(float a, const Mat2& b) {
+        Mat2 c = b;
+        c *= a;
+        return c;
+    }
+
+    inline Mat2& operator/=(Mat2& a, float b) {
+        for (int i = 0; i < 4; i++) a.values[i] /= b;
+        return a;
+    }
+
+    inline Mat2 operator/(const Mat2& a, float b) {
+        Mat2 c = a;
+        c /= b;
+        return c;
+    }
+    inline Mat2 operator/(float a, const Mat2& b) {
+        Mat2 c = b;
+        c /= a;
+        return c;
+    }
+
+
     struct Mat3
     {
         static const int translateX = 2;
