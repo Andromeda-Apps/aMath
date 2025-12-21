@@ -696,6 +696,138 @@ namespace aMath
     }
 
 
+    struct Quaternion {
+
+        union {
+            struct { float x, y, z, w; };
+            struct { float i, j, k, ww; };
+        };
+
+        Quaternion() : Quaternion(1.0f, 0.0f, 0.0f, 0.0f) {}
+        Quaternion(float px, float py, float pz, float pw) :
+            x(px), y(py), z(pz), w(pw) {}
+
+        // Implemented after the struct
+        friend Quaternion operator+(const Quaternion& q1, const Quaternion& q2);
+        friend Quaternion operator*(const Quaternion& q, float s);
+        friend Quaternion operator*(float s, const Quaternion& q);
+        friend Quaternion operator*(const Quaternion& q1, const Quaternion& q2);
+        friend Quaternion operator-(const Quaternion& q1, const Quaternion q2);
+        friend Quaternion operator!(const Quaternion& q); 
+
+        float length() {
+            return sqrt(x*x + y*y + z*z + w*w);
+        }
+
+        void scale(float magnitude) {
+            float old_mag = length();
+            if (old_mag == 0.0 || old_mag == magnitude) return;
+            float factor = magnitude / old_mag;
+            x *= factor;
+            y *= factor;
+            z *= factor;
+            w *= factor;
+        }
+        void normalize() {scale(1.0);}
+
+        void setRotation(float px, float py, float pz, float pangle) {
+            float half_angle = pangle / 2.0;
+            float s = sin(half_angle);
+            x = s * px;
+            y = s * py;
+            z = s * pz;
+            w = cos(half_angle);
+            normalize();
+        }
+        void setRotation(Vec4 v) {setRotation(v.x, v.y, v.z, v.w);}
+        void setRotation(Vec3 v, float p_angle) {setRotation(v.x, v.y, v.z, p_angle);}
+
+        Vec4 getEulerRotation() {
+            Vec3 a;
+            float half_angle = acos(w);
+            float s = sin(half_angle);
+            a.x = x / s;
+            a.y = y / s;
+            a.z = z / s;
+            a.normalize();
+            return Vec4(a.x, a.y, a.z, half_angle * 2.0);
+        }
+
+        Mat4 getRotationMatrix() {
+            Mat4 m;
+            float xx = x*x;
+            float yy = y*y;
+            float zz = z*z;
+            float xy = x*y;
+            float wz = w*z;
+            float xz = x*z;
+            float wy = w*y;
+            float yz = y*z;
+            float wx = w*x;
+            
+            m.values[0] = 1 - 2*yy - 2*zz;
+            m.values[1] = 2*xy - 2*wz;
+            m.values[2] = 2*xz + 2*wy;
+            
+            m.values[4] = 2*xy + 2*wz;
+            m.values[5] = 1 - 2*xx - 2*zz;
+            m.values[6] = 2*yz - 2*wx;
+        
+            m.values[8] = 2*xz - 2*wy;
+            m.values[9] = 2*yz + 2*wx;
+            m.values[10] = 1 - 2*xx - 2*yy;
+
+            return m;
+        }
+
+        void rotate(Vec3& v) {
+            Quaternion q_conj = !(*this);
+            Quaternion v_quat = Quaternion(v.x, v.y, v.z, 0.0);
+            v = ((*this) * v_quat * q_conj).toVec3();
+        }
+
+        Vec4 asVec4() {
+            return Vec4(x, y, z, w);
+        }
+        Vec3 toVec3() {
+            return Vec3(x, y, z);
+        }
+
+    };
+
+    inline Quaternion operator+(const Quaternion& q1, const Quaternion& q2) {
+        Quaternion res = Quaternion(q1.x + q2.x, q1.y + q2.y, q1.z + q2.z, q1.w + q2.w);
+        return res;
+    }
+
+    inline Quaternion operator*(const Quaternion& q, float s) {
+        Quaternion res = Quaternion(s*q.x, s*q.y, s*q.z, s*q.w);
+        return res;
+    }
+    inline Quaternion operator*(float s, const Quaternion& q) {
+        return q*s;
+    }
+
+    inline Quaternion operator*(const Quaternion& q1, const Quaternion& q2) {
+        Quaternion res = Quaternion(
+            q1.w * q2.x + q2.w * q1.x + q2.y * q1.z - q1.z * q2.z,
+            q1.w * q2.y + q2.w * q1.y + q2.z * q1.x - q1.z * q1.x,
+            q1.w * q2.z + q2.w * q1.z + q2.x * q1.y - q1.x * q2.y,
+            q1.w * q2.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z
+        );
+        return res;
+    }
+
+    inline Quaternion operator-(const Quaternion& q1, const Quaternion q2) {
+        return q1 + (-1.0 * q2);
+    }
+
+    // Quaternion Conjugate
+    inline Quaternion operator!(const Quaternion& q) {
+        Quaternion res = Quaternion(-q.x, -q.y, -q.z, q.w);
+        return res;
+    }
+
     typedef Vec2 Point2;
     typedef Vec3 Point3;
 
